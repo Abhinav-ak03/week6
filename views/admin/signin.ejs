@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sign In</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            overflow: hidden;
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        .image-side {
+            width: 40%;
+            background: linear-gradient(45deg, #6c5ce7, #a8a4e6);
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-side {
+            width: 60%;
+            padding: 3rem;
+            background: white;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            color: #2d3436;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-floating {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #eee;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+            height: 3.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 0.2rem rgba(108, 92, 231, 0.1);
+        }
+
+        .btn-primary {
+            background: #6c5ce7;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem;
+            width: 100%;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #5b4bc4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .form-check {
+            margin: 1.25rem 0;
+        }
+
+        .form-check-input:checked {
+            background-color: #6c5ce7;
+            border-color: #6c5ce7;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .password-toggle.visible {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E");
+        }
+
+        .password-toggle.hidden {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'%3E%3C/path%3E%3Cline x1='1' y1='1' x2='23' y2='23'%3E%3C/line%3E%3C/svg%3E");
+        }
+
+        .divider {
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-container {
+                flex-direction: column;
+            }
+
+            .image-side {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .form-side {
+                width: 100%;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+
+        <div class="image-side">
+            <img src="/images/admin.jpeg" alt="Admin">
+        </div>
+
+        <!-- Form Side -->
+        <div class="form-side">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p class="text-muted">Please sign in to continue</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                    <label for="emailInput">Email address</label>
+                </div>
+
+                <div class="form-floating position-relative">
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                    <label for="passwordInput">Password</label>
+                    <span class="password-toggle hidden" onclick="togglePassword()"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Sign In
+                </button>
+                <div class="mt-3 text-center">
+                    <a href="#" class="text-decoration-none">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const toggleButton = document.querySelector('.password-toggle');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.classList.remove('hidden');
+                toggleButton.classList.add('visible');
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.classList.remove('visible');
+                toggleButton.classList.add('hidden');
+            }
+        }
+
+        
+    </script>
+</body>
+
+</html>
