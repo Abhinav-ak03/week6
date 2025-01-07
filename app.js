@@ -40,7 +40,7 @@ app.use('/', userRouter)
 // Starting the server on the specified port (from environment variables)
 // Logs a message to indicate the server is running
 app.listen(process.env.PORT, () => {
-    console.log("Server running...");
+    console.log(`Server running on:http://localhost:${process.env.PORT}`);
 });
 
 // Exporting the `app` instance for use in other files (e.g., for testing or modularization)

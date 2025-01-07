@@ -22,12 +22,37 @@ const pageNotFound= async (req,res)=>{
     }
 }
 
+// Load sign-in page for user function 
+const loadSignIn = async (req, res) => {
+    try {
+        // Render the 'SignIn' view
+        return res.render("signIn");
+    } catch (error) {
+        console.error("Error in loading SignIn page:", error.message);
+        // Send error response and return
+        return res.status(500).send("Server error");
+    }
+}
 
+
+// Load sign-up page for user function 
+const loadSignUP = async (req, res) => {
+    try {
+        // Render the 'Signup' view
+        return res.render("signUp");
+    } catch (error) {
+        console.error("Error in loading signup page:", error.message);
+        // Send error response and return
+        return res.status(500).send("Server error");
+    }
+}
 
 
 // Export the function to be used in other files
 
 module.exports = { 
     loadHomepage,
-    pageNotFound 
+    pageNotFound,
+    loadSignIn,
+    loadSignUP,
  };

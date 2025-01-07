@@ -119,27 +119,6 @@
             border-color: #6c5ce7;
         }
 
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-        }
-
-        .password-toggle.visible {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'%3E%3C/path%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3C/svg%3E");
-        }
-
-        .password-toggle.hidden {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'%3E%3C/path%3E%3Cline x1='1' y1='1' x2='23' y2='23'%3E%3C/line%3E%3C/svg%3E");
-        }
-
         .divider {
             margin: 1.5rem 0;
             display: flex;
@@ -185,7 +164,7 @@
     <div class="login-container">
 
         <div class="image-side">
-            <img src="/images/admin.jpeg" alt="Admin">
+            <img src="/images/user.jpeg" alt="Admin">
         </div>
 
         <!-- Form Side -->
@@ -204,7 +183,6 @@
                 <div class="form-floating position-relative">
                     <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
                     <label for="passwordInput">Password</label>
-                    <span class="password-toggle hidden" onclick="togglePassword()"></span>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -218,24 +196,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('passwordInput');
-            const toggleButton = document.querySelector('.password-toggle');
-
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleButton.classList.remove('hidden');
-                toggleButton.classList.add('visible');
-            } else {
-                passwordInput.type = 'password';
-                toggleButton.classList.remove('visible');
-                toggleButton.classList.add('hidden');
-            }
-        }
-
-        
-    </script>
 </body>
 
 </html>
