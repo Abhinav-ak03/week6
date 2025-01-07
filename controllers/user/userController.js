@@ -1,3 +1,5 @@
+const User = require("../../models/userSchema")
+
 
 // Load home page for user function 
 const loadHomepage = async (req, res) => {
@@ -13,7 +15,7 @@ const loadHomepage = async (req, res) => {
 
 // 404-Error page for showing front end 
 
-const pageNotFound= async (req,res)=>{
+const pageNotFound = async (req, res) => {
     try {
         res.render('page-404')
     } catch (error) {
@@ -47,12 +49,27 @@ const loadSignUP = async (req, res) => {
     }
 }
 
+const signUP = async (req, res) => {
+    const { name, email, phone, password } = req.body;
+    try {
+        const newUser = new User({ name, email, phone, password })
+        await newUser.save()
+
+        res.redirect("/signin")
+
+    } catch (error) {
+        console.error("Error in saving user in DB:", error.message);
+        return res.status(500).send("Internal Server error");
+    }
+}
+
 
 // Export the function to be used in other files
 
-module.exports = { 
+module.exports = {
     loadHomepage,
     pageNotFound,
     loadSignIn,
     loadSignUP,
- };
+    signUP,
+};

@@ -110,14 +110,6 @@
             box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
         }
 
-        .form-check {
-            margin: 1.25rem 0;
-        }
-
-        .form-check-input:checked {
-            background-color: #6c5ce7;
-            border-color: #6c5ce7;
-        }
 
         @media (max-width: 768px) {
             body {
@@ -153,45 +145,35 @@
                 <p class="text-muted">Please fill in your details to get started</p>
             </div>
 
-            <form id="signupForm">
+            <form id="signupForm" method="post" action="/signup">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="firstNameInput" placeholder="First Name"
-                                required>
-                            <label for="firstNameInput">First Name</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name" required>
-                            <label for="lastNameInput">Last Name</label>
+                            <input type="text" class="form-control" id="nameInput" name="name" placeholder="Name" required>
+                            <label for="nameInput">Full Name</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                    <input type="email" name="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
                     <label for="emailInput">Email address</label>
                 </div>
 
+                <div class="form-floating">
+                    <input type="text" name="phone" class="form-control" id="phoneInput" placeholder="phone" required>
+                    <label for="phone">Contact Number</label>
+                </div>
+
                 <div class="form-floating position-relative">
-                    <input type="password" class="form-control" id="passwordInput" placeholder="Password" required>
+                    <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Password" required>
                     <label for="passwordInput">Password</label>
                 </div>
 
                 <div class="form-floating position-relative">
-                    <input type="password" class="form-control" id="confirmPasswordInput" placeholder="Confirm Password"
+                    <input type="Password" name="cPassword" class="form-control" id="cPasswordInput" placeholder="Confirm Password"
                         required>
                     <label for="confirmPasswordInput">Confirm Password</label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
-                    <label class="form-check-label" for="termsCheck">
-                        I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#"
-                            class="text-decoration-none">Privacy Policy</a>
-                    </label>
                 </div>
 
                 <button type="submit" class="btn btn-primary">
@@ -199,7 +181,7 @@
                 </button>
 
                 <div class="mt-3 text-center">
-                    Already have an account? <a href="signin.html" class="text-decoration-none">Sign In</a>
+                    Already have an account? <a href="/signin" class="text-decoration-none">Sign In</a>
                 </div>
             </form>
         </div>
@@ -211,13 +193,14 @@
         document.getElementById('signupForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const password = document.getElementById('passwordInput').value;
-            const confirmPassword = document.getElementById('confirmPasswordInput').value;
+            const confirmPassword = document.getElementById('cPasswordInput').value;
 
             if (password !== confirmPassword) {
                 alert('Passwords do not match!');
                 return;
             }
-            // Add your signup logic here
+            // If passwords match, submit the form
+            this.submit();
         });
     </script>
 </body>
