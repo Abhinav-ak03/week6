@@ -15,7 +15,7 @@ router.get("/signin",userController.loadSignIn)
 router.get("/signup",userController.loadSignUP)
 
 // Route to post the signup page
-router.post("/signup",userController.signUP)
+router.post("/signup",userController.signUp)
 
 
 module.exports = router; 

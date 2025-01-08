@@ -49,20 +49,58 @@ const loadSignUP = async (req, res) => {
     }
 }
 
-const signUP = async (req, res) => {
+const signUp = async (req, res) => {
     const { name, email, phone, password } = req.body;
-    try {
-        const newUser = new User({ name, email, phone, password })
-        await newUser.save()
 
-        res.redirect("/signin")
+    try {
+        // Check for existing email
+        const existingEmail = await User.findOne({ email });
+        if (existingEmail) {
+            return res.status(400).json({
+                status: 'error',
+                field: 'email',
+                message: 'Email already exists'
+            });
+        }
+
+        // Check for existing phone
+        const existingPhone = await User.findOne({ phone });
+        if (existingPhone) {
+            return res.status(400).json({
+                status: 'error',
+                field: 'phone',
+                message: 'Phone number already exists'
+            });
+        }
+
+        // Check for existing username
+        const existingName = await User.findOne({ name });
+        if (existingName) {
+            return res.status(400).json({
+                status: 'error',
+                field: 'name',
+                message: 'Username already exists'
+            });
+        }
+
+        // If no duplicates found, create new user
+        const newUser = new User({ name, email, phone, password });
+        await newUser.save();
+
+        return res.status(201).json({
+            status: 'success',
+            message: 'User created successfully',
+            redirect: '/signin'
+        });
 
     } catch (error) {
         console.error("Error in saving user in DB:", error.message);
-        return res.status(500).send("Internal Server error");
+        return res.status(500).json({
+            status: 'error',
+            message: 'Internal Server error'
+        });
     }
-}
-
+};
 
 // Export the function to be used in other files
 
@@ -71,5 +109,5 @@ module.exports = {
     pageNotFound,
     loadSignIn,
     loadSignUP,
-    signUP,
+    signUp,
 };
